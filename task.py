@@ -20,7 +20,6 @@ research_task=Task(
     expected_output=" A comprehensive 5 paragraph detailed explaination of the {topic} of the video"
     tools=[yt_tool],
     agents=blog_researcher,
-    llm=llm_model
 )
 
 ## writing task
@@ -34,6 +33,5 @@ writng_task=Task(
     tools=[yt_tool]
     agents=blog_writer,
     async_execution=False,
-    llm=llm_model,
     output_file="new_blog-post.md"
 )

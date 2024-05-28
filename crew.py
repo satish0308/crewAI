@@ -20,8 +20,7 @@ crew=Crew(
     memory=True,
     cache=True,
     max_rpm=100,
-    share_crew=True,
-    llm=llm_model
+    share_crew=True
 )
 
 ##kick off the crew

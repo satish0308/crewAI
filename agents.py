@@ -5,7 +5,7 @@ from tools import yt_tool
 
 from langchain_community.llms import HuggingFaceEndpoint
 
-llm_model = HuggingFaceEndpoint(
+llm = HuggingFaceEndpoint(
     endpoint_url="meta-llama/Meta-Llama-3-8B",
     huggingfacehub_api_token="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",
     task="text-generation",
@@ -14,15 +14,15 @@ llm_model = HuggingFaceEndpoint(
 
 blog_researcher=Agent(
     role='Blog Researcher from YouTube Videos',
-    gole="Get the relevant video content for the topic from YT Channel",
+    gole="Get the relevant video content for the topic from YT Channel {topic}",
     verboe=True,
     memory=True,
     backstory=(
             "Expert in  AI ML and good with recent trends in Generative ai and LLM industry "
     ),
-    tools=[],
-    allow_delegation=True,
-    llm=llm_model
+    tools=[yt_tool],
+    llm=llm,
+    allow_delegation=True
 )
 
 
@@ -37,7 +37,7 @@ blog_writer=Agent(
             "Expert in  AI ML and good with recent trends in Generative ai and LLM industry "
     ),
     tools=[yt_tool],
+    llm=llm,
     allow_delegation=True,
-    llm=llm_model
 )
 
