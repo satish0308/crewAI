@@ -7,7 +7,7 @@ from langchain_community.llms import HuggingFaceEndpoint
 
 llm_model = HuggingFaceEndpoint(
     endpoint_url="meta-llama/Meta-Llama-3-8B",
-    huggingfacehub_api_token="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",
+    huggingfacehub_api_token="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",
     task="text-generation",
     max_new_tokens=512
 )
@@ -15,9 +15,9 @@ llm_model = HuggingFaceEndpoint(
 research_task=Task(
     description=(
         "Identify the video {topic}"
-        "Get detiailed information about the video from the channel"
+        "Get detiailed information about the video from the channel",
     ),
-    expected_output=" A comprehensive 5 paragraph detailed explaination of the {topic} of the video"
+    expected_output=" A comprehensive 5 paragraph detailed explaination of the {topic} of the video",
     tools=[yt_tool],
     agents=blog_researcher,
 )
@@ -29,8 +29,8 @@ writng_task=Task(
     description=(
         "get the info from the youtube channel topic {topic}"
     ),
-    expected_output=" Summarixe the info from the youtube channel video on the topic {topic}"
-    tools=[yt_tool]
+    expected_output=" Summarixe the info from the youtube channel video on the topic {topic}",
+    tools=[yt_tool],
     agents=blog_writer,
     async_execution=False,
     output_file="new_blog-post.md"
