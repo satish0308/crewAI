@@ -6,12 +6,12 @@ import os
 
 from langchain_community.llms import HuggingFaceEndpoint
 os.environ["HUGGINGFACE_ACCESS_TOKEN"] =os.getenv('HF_KEY')
-llm = HuggingFaceEndpoint(
-    endpoint_url="meta-llama/Meta-Llama-3-8B",
-    huggingfacehub_api_token=os.getenv('HF_KEY'),
-    task="text-generation",
-    max_new_tokens=512
-)
+# llm = HuggingFaceEndpoint(
+#     endpoint_url="meta-llama/Meta-Llama-3-8B-Instruct",
+#     huggingfacehub_api_token=os.getenv('HF_KEY'),
+#     task="text-generation",
+#     max_new_tokens=512
+#)
 
 blog_researcher=Agent(
     role='Blog Researcher from YouTube Videos',
