@@ -6,12 +6,11 @@ import os
 
 from langchain_community.llms import HuggingFaceEndpoint
 os.environ["HUGGINGFACE_ACCESS_TOKEN"] =os.getenv('HF_KEY')
-# llm = HuggingFaceEndpoint(
-#     endpoint_url="meta-llama/Meta-Llama-3-8B-Instruct",
-#     huggingfacehub_api_token=os.getenv('HF_KEY'),
-#     task="text-generation",
-#     max_new_tokens=512
-#)
+llm = HuggingFaceEndpoint(
+    endpoint_url="meta-llama/Meta-Llama-3-8B-Instruct",
+    huggingfacehub_api_token=os.getenv('HF_KEY'),
+    task="text-generation"
+)
 
 blog_researcher=Agent(
     role='Blog Researcher from YouTube Videos',
@@ -22,7 +21,8 @@ blog_researcher=Agent(
             "Expert in  AI ML and good with recent trends in Generative ai and LLM industry "
     ),
     tools=[yt_tool],
-    allow_delegation=True
+    allow_delegation=True,
+    llm=llm
 )
 
 
@@ -38,5 +38,6 @@ blog_writer=Agent(
     ),
     tools=[yt_tool],
     allow_delegation=True,
+    llm=llm
 )
 

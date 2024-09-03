@@ -4,3 +4,4 @@ langchain_community
 langchain_huggingface
 ollama
 google.generativeai
+langchain_ollama

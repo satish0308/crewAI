@@ -3,27 +3,40 @@ from tools import yt_tool
 from agents import blog_researcher,blog_writer
 from task import research_task,writng_task
 import os
+from langchain_ollama import ChatOllama
 os.environ["HUGGINGFACE_ACCESS_TOKEN"] =os.getenv('HF_KEY')
+# os.environ["OPENAI_API_KEY"]=""
+# # os.environ["OPENAI_MODEL_NAME"]='llama3-8b-8192'
+# # os.environ["OPENAI_API_BASE"]="https://api.groq.com/openai/v1"
+# from langchain_community.llms import HuggingFaceEndpoint
 
-from langchain_community.llms import HuggingFaceEndpoint
+# llm = HuggingFaceEndpoint(
+#     endpoint_url="meta-llama/Meta-Llama-3-8B-Instruct",
+#     huggingfacehub_api_token=os.getenv('HF_KEY'),
+#     task="text-generation",
+#     max_new_tokens=512
+# )
+os.environ['OPENAI_API_BASE']='http://localhost:11434'
+os.environ['OPENAI_MODEL_NAME']='llama3.1'  # Adjust based on available model
+os.environ['OPENAI_API_KEY']='' # No API Key required for Ollama
 
-llm_model = HuggingFaceEndpoint(
-    endpoint_url="meta-llama/Meta-Llama-3-8B",
-    huggingfacehub_api_token=os.getenv('HF_KEY'),
-    task="text-generation",
-    max_new_tokens=512
-)
+
+llm = ChatOllama(
+    model = "llama3.1",
+    base_url = "http://localhost:11434")
 
 crew=Crew(
     agents=[blog_researcher,blog_writer],
     tasks=[research_task,writng_task],
-    process=Process.sequential,
+    process=Process.sequential,  # Optional: Sequential task execution is default
     full_output=True,
     memory=True,
     cache=True,
     max_rpm =100,
     share_crew=True,
-    verbose=True
+    verbose=True,
+    manager_llm=llm,
+    planning_llm=llm,
     )
 
 
