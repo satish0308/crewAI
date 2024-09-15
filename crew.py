@@ -4,6 +4,7 @@ from agents import blog_researcher,blog_writer
 from task import research_task,writng_task
 import os
 from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
 os.environ["HUGGINGFACE_ACCESS_TOKEN"] =os.getenv('HF_KEY')
 # os.environ["OPENAI_API_KEY"]=""
 # # os.environ["OPENAI_MODEL_NAME"]='llama3-8b-8192'
@@ -21,9 +22,10 @@ os.environ['OPENAI_MODEL_NAME']='llama3.1'  # Adjust based on available model
 os.environ['OPENAI_API_KEY']='' # No API Key required for Ollama
 
 
-llm = ChatOllama(
-    model = "llama3.1",
-    base_url = "http://localhost:11434")
+llm = ChatOpenAI(
+    model = "llama2",
+    base_url = "http://localhost:11434",
+    api_key="NA")
 
 crew=Crew(
     agents=[blog_researcher,blog_writer],
